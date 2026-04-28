@@ -227,6 +227,52 @@
         }
         .abstract-content.open { display: block; }
 
+        /* Patents */
+        .patent-item {
+            padding: 16px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .patent-item:last-child { border-bottom: none; }
+        .patent-title {
+            font-weight: 600; font-size: 0.95rem; color: var(--text);
+            line-height: 1.5; margin-bottom: 4px;
+        }
+        .patent-meta {
+            font-size: 0.82rem; color: var(--text-light); line-height: 1.6;
+        }
+        .patent-meta .label { color: var(--accent); font-weight: 500; }
+        .patent-actions {
+            display: flex; gap: 8px; margin-top: 8px;
+        }
+        .patent-actions a {
+            display: inline-flex; align-items: center; gap: 5px;
+            text-decoration: none; font-size: 0.78rem; color: var(--accent);
+            padding: 4px 10px; border: 1px solid var(--border); border-radius: 5px;
+            transition: all 0.2s; background: var(--bg);
+        }
+        .patent-actions a:hover { background: var(--bg-alt); border-color: var(--accent); }
+
+        /* Awards */
+        .award-item {
+            display: flex; gap: 20px; padding: 14px 0;
+            align-items: flex-start;
+        }
+        .award-item + .award-item { border-top: 1px dashed var(--border); }
+        .award-icon {
+            flex-shrink: 0; width: 44px; height: 44px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; color: #92400e;
+        }
+        .award-detail { flex: 1; }
+        .award-name {
+            font-weight: 600; font-size: 0.93rem; color: var(--text); line-height: 1.5;
+        }
+        .award-meta {
+            font-size: 0.82rem; color: var(--text-light); line-height: 1.6;
+        }
+        .award-meta .label { color: var(--accent); font-weight: 500; }
+
         /* News */
         .news-item { display: flex; gap: 16px; padding: 10px 0; font-size: 0.9rem; }
         .news-date { flex-shrink: 0; color: var(--text-light); font-size: 0.82rem; font-weight: 500; min-width: 80px; padding-top: 2px; }
@@ -263,6 +309,8 @@
             <li><a href="#about">About</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#publications">Publications</a></li>
+            <li><a href="#patents">Patents</a></li>
+            <li><a href="#awards">Awards</a></li>
             <li><a href="#news">News</a></li>
         </ul>
     </div>
@@ -441,6 +489,63 @@
                         <button class="abstract-toggle" onclick="toggleAbstract(this)"><i class="fas fa-plus"></i> Abstract</button>
                     </div>
                     <div class="abstract-content">A critical issue for designing predictive energy management (PEM) strategy of Plug-in Hybrid Electric Vehicles is the planning of optimal global charge trajectory. Existing planning methods have flaws in terms of optimality or computational efficiency due to their lack of in-depth consideration about optimal charge depletion behaviors. To address this issue, rigorous theoretical analysis on the aggregated local and global optimal charge depletion behaviors in energy domain is conducted by combining Pontryagin's Minimum Principle-based analytical derivations and some qualitative reasoning. Fundamental understanding on how the optimal charge depletion rates behave in different driving conditions and why they exhibit such behaviors is provided. The theoretical analysis is further validated through model-in-the-loop tests using an experimentally validated high-fidelity vehicle simulator.</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Patents -->
+    <section id="patents">
+        <h2 class="section-title">Patents</h2>
+
+        <div class="patent-item">
+            <div class="patent-title">一种基于单一场景和多场景的自动驾驶方法</div>
+            <div class="patent-meta">
+                <span class="label">Inventors:</span> 于海洋, <span class="me" style="font-weight:600;color:var(--primary)">蔡翾</span>, 任毅龙, 谢丹木, 崔志勇<br>
+                <span class="label">Patent No.:</span> ZL 2024 1 0072750.3 &nbsp;|&nbsp;
+                <span class="label">Authorization No.:</span> CN 117590856 B<br>
+                <span class="label">Assignee:</span> 北京航空航天大学 (Beihang University) &nbsp;|&nbsp;
+                <span class="label">Granted:</span> March 26, 2024 &nbsp;|&nbsp;
+                <span class="label">Filed:</span> January 18, 2024
+            </div>
+            <div class="patent-actions">
+                <a href="patent/autonomous-driving-scenario-patent.pdf"><i class="fas fa-file-pdf"></i> Certificate</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Awards -->
+    <section id="awards">
+        <h2 class="section-title">Awards</h2>
+
+        <div class="award-item">
+            <div class="award-icon"><i class="fas fa-star"></i></div>
+            <div class="award-detail">
+                <div class="award-name">FTTE 2025 Rising Star Award (未来之星)</div>
+                <div class="award-meta">
+                    <span class="label">Awardee:</span> <span style="font-weight:600;color:var(--primary)">Xuan Cai</span> &nbsp;|&nbsp;
+                    <span class="label">Organization:</span> Future Transportation Technology and Engineering (FTTE) 2025 &nbsp;|&nbsp;
+                    <span class="label">Year:</span> 2025
+                </div>
+                <div class="patent-actions" style="margin-top:6px">
+                    <a href="reward/FTTE-2025-rising-star.pdf"><i class="fas fa-file-pdf"></i> Certificate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="award-item">
+            <div class="award-icon"><i class="fas fa-trophy"></i></div>
+            <div class="award-detail">
+                <div class="award-name">大学生创新创业大赛产业赛道二等奖</div>
+                <div class="award-meta">
+                    <span class="label">Awardee:</span> <span style="font-weight:600;color:var(--primary)">Xuan Cai</span> &nbsp;|&nbsp;
+                    <span class="label">Organization:</span> 中国国际大学生创新大赛 &nbsp;|&nbsp;
+                    <span class="label">Year:</span> 2023
+                </div>
+                <div class="patent-actions" style="margin-top:6px">
+                    <a href="reward/innovation-competition-2nd-prize.pdf"><i class="fas fa-file-pdf"></i> Certificate</a>
                 </div>
             </div>
         </div>
