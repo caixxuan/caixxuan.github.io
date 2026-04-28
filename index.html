@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xuan Cai - Academic Homepage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #2b6cb0;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #ffffff;
+            --bg-alt: #f7fafc;
+            --border: #e2e8f0;
+            --hover-bg: #edf2f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            transition: box-shadow 0.3s;
+        }
+        nav.scrolled { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+        .nav-inner {
+            max-width: 960px; margin: 0 auto; padding: 0 24px;
+            display: flex; align-items: center; height: 56px; justify-content: space-between;
+        }
+        .nav-name {
+            font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: 600;
+            color: var(--primary); text-decoration: none; letter-spacing: 0.01em;
+        }
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-light); font-size: 0.875rem;
+            font-weight: 500; transition: color 0.2s; letter-spacing: 0.02em;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Container */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+        /* Hero */
+        .hero {
+            padding-top: 100px; padding-bottom: 48px;
+            display: flex; gap: 48px; align-items: flex-start;
+        }
+        .hero-photo { flex-shrink: 0; }
+        .hero-photo img {
+            width: 200px; height: auto; max-height: 240px;
+            object-fit: contain; border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .hero-photo img:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+        }
+        .hero-info h1 {
+            font-family: 'Crimson Pro', serif; font-size: 2.4rem; font-weight: 600;
+            color: var(--primary); margin-bottom: 6px; letter-spacing: -0.01em;
+        }
+        .hero-info .title { font-size: 1.1rem; color: var(--accent); margin-bottom: 4px; font-weight: 500; }
+        .hero-info .affiliation { font-size: 1rem; color: var(--text-light); margin-bottom: 16px; }
+        .hero-info .contact-links { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+        .contact-links a {
+            display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+            color: var(--text-light); font-size: 0.85rem; padding: 6px 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            transition: all 0.2s; background: var(--bg);
+        }
+        .contact-links a:hover { color: var(--primary); border-color: var(--primary); background: var(--bg-alt); }
+        .contact-links a i { font-size: 0.9rem; }
+
+        /* Section */
+        section { padding: 40px 0; }
+        section + section { border-top: 1px solid var(--border); }
+        .section-title {
+            font-family: 'Crimson Pro', serif; font-size: 1.6rem; font-weight: 600;
+            color: var(--primary); margin-bottom: 24px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* About */
+        .about-text { font-size: 0.98rem; line-height: 1.8; color: var(--text); max-width: 720px; }
+        .about-text p + p { margin-top: 12px; }
+        .research-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+        .research-tag {
+            display: inline-block; padding: 5px 14px; background: #ebf4ff;
+            color: var(--primary-light); border-radius: 20px;
+            font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
+        }
+
+        /* Education */
+        .edu-item { display: flex; gap: 20px; padding: 16px 0; }
+        .edu-item + .edu-item { border-top: 1px dashed var(--border); }
+        .edu-year { flex-shrink: 0; width: 120px; font-size: 0.88rem; color: var(--text-light); font-weight: 500; padding-top: 2px; }
+        .edu-detail { flex: 1; }
+        .edu-detail .degree { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+        .edu-detail .school { color: var(--text-light); font-size: 0.9rem; }
+
+        /* Publications - Card Layout */
+        .pub-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .pub-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border-color: #cbd5e0;
+        }
+        .pub-card-inner {
+            display: flex;
+            gap: 0;
+        }
+        .pub-figure {
+            flex-shrink: 0;
+            width: 280px;
+            min-height: 180px;
+            background: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-right: 1px solid var(--border);
+        }
+        .pub-figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+        .pub-info {
+            flex: 1;
+            padding: 18px 22px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .pub-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            width: fit-content;
+            letter-spacing: 0.03em;
+        }
+        .pub-badge.journal { background: #ebf4ff; color: var(--primary-light); }
+        .pub-badge.conference { background: #fef3c7; color: #92400e; }
+        .pub-title {
+            font-weight: 600; font-size: 0.95rem; color: var(--text);
+            line-height: 1.5; margin-bottom: 6px;
+        }
+        .pub-brief {
+            font-size: 0.82rem; color: var(--text-light); line-height: 1.55;
+            margin-bottom: 8px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .pub-authors {
+            font-size: 0.82rem; color: var(--text-light); line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .pub-authors .me { font-weight: 600; color: var(--primary); }
+        .pub-venue {
+            font-size: 0.82rem; color: var(--accent); font-style: italic;
+            margin-bottom: 10px;
+        }
+        .pub-actions {
+            display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto;
+        }
+        .pub-actions a {
+            display: inline-flex; align-items: center; gap: 5px;
+            text-decoration: none; font-size: 0.78rem; color: var(--accent);
+            padding: 4px 10px; border: 1px solid var(--border); border-radius: 5px;
+            transition: all 0.2s; background: var(--bg);
+        }
+        .pub-actions a:hover { background: var(--bg-alt); border-color: var(--accent); }
+        .pub-actions a i { font-size: 0.8rem; }
+
+        /* Expandable abstract */
+        .abstract-toggle {
+            display: inline-flex; align-items: center; gap: 5px;
+            text-decoration: none; font-size: 0.78rem; color: var(--accent);
+            padding: 4px 10px; border: 1px solid var(--border); border-radius: 5px;
+            transition: all 0.2s; background: var(--bg); cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .abstract-toggle:hover { background: var(--bg-alt); border-color: var(--accent); }
+        .abstract-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px 14px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.65;
+            border-left: 3px solid var(--accent);
+        }
+        .abstract-content.open { display: block; }
+
+        /* News */
+        .news-item { display: flex; gap: 16px; padding: 10px 0; font-size: 0.9rem; }
+        .news-date { flex-shrink: 0; color: var(--text-light); font-size: 0.82rem; font-weight: 500; min-width: 80px; padding-top: 2px; }
+        .news-text { color: var(--text); line-height: 1.6; }
+
+        /* Footer */
+        footer { margin-top: 60px; padding: 24px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.82rem; color: var(--text-light); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+            .hero-photo img { width: 160px; max-height: 200px; }
+            .hero-info .contact-links { justify-content: center; }
+            .research-tags { justify-content: center; }
+            .edu-item { flex-direction: column; gap: 4px; }
+            .edu-year { width: auto; }
+            .nav-links { gap: 16px; }
+            .nav-links a { font-size: 0.78rem; }
+            .pub-card-inner { flex-direction: column; }
+            .pub-figure {
+                width: 100%; min-height: 140px; max-height: 200px;
+                border-right: none; border-bottom: 1px solid var(--border);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-name">Xuan Cai</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#news">News</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-photo">
+            <img src="picture/Gemini_Generated_Image_7f6kiw7f6kiw7f6k.png" alt="Xuan Cai">
+        </div>
+        <div class="hero-info">
+            <h1>Xuan Cai (蔡翾)</h1>
+            <div class="title">Ph.D. Candidate</div>
+            <div class="affiliation">Beihang University (北京航空航天大学)</div>
+            <div class="contact-links">
+                <a href="mailto:caixuan@buaa.edu.cn"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://scholar.google.com.hk/citations?user=cT_hRQ8AAAAJ&hl=zh-CN" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a>
+                <a href="https://github.com/caixxuan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-text">
+            <p>
+                I am a Ph.D. candidate at the State Key Laboratory of Intelligent Transportation Systems, Beihang University, supervised by Prof. <em>Zhiyong Cui</em> and Prof. <em>Yilong Ren</em>. Prior to that, I received my Master's and Bachelor's degrees from Hunan University.
+            </p>
+            <p>
+                My research focuses on <strong>autonomous driving</strong>, <strong>simulation scenario generation</strong> through AI technologies. I am dedicated to developing safe, reliable, and efficient intelligent transportation systems through adversarial learning.
+            </p>
+        </div>
+        <div class="research-tags">
+            <span class="research-tag">Autonomous Driving</span>
+            <span class="research-tag">Adversarial Testing</span>
+            <span class="research-tag">Reinforcement Learning</span>
+            <span class="research-tag">Scenario Generation</span>
+            <span class="research-tag">LLM for Driving</span>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+            <div class="edu-year">2023 – Present</div>
+            <div class="edu-detail">
+                <div class="degree">Ph.D. in Transportation Engineering</div>
+                <div class="school">Beihang University (北京航空航天大学)</div>
+            </div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-year">2020 – 2023</div>
+            <div class="edu-detail">
+                <div class="degree">M.S. in Vehicle Engineering</div>
+                <div class="school">Hunan University (湖南大学)</div>
+            </div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-year">2016 – 2020</div>
+            <div class="edu-detail">
+                <div class="degree">B.S. in Vehicle Engineering</div>
+                <div class="school">Hunan University (湖南大学)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+        <h2 class="section-title">Publications</h2>
+
+        <!-- 1. Text2Scenario (2025, Automotive Innovation) -->
+        <div class="pub-card">
+            <div class="pub-card-inner">
+                <div class="pub-figure">
+                    <img src="publication/figures/text2scenario.png" alt="Text2Scenario Framework">
+                </div>
+                <div class="pub-info">
+                    <span class="pub-badge journal">Journal</span>
+                    <div class="pub-title">Text2Scenario: Text-Driven Scenario Generation for Autonomous Driving Test</div>
+                    <div class="pub-brief">Leverages a Large Language Model to autonomously generate simulation test scenarios from natural language inputs, extracting scenario components from a hierarchical repository and fabricating executable test scenarios via Domain Specific Language.</div>
+                    <div class="pub-authors"><span class="me">Xuan Cai</span>, Xuesong Bai, Zhiyong Cui, Danmu Xie, Daocheng Fu, Haiyang Yu, Yilong Ren</div>
+                    <div class="pub-venue">Automotive Innovation, 2025 &nbsp;|&nbsp; doi: 10.1007/s42154-025-00374-8</div>
+                    <div class="pub-actions">
+                        <a href="publication/Text2Scenario%20Text%E2%80%91Driven%20Scenario%20Generation%20for%C2%A0Autonomous%20.pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <button class="abstract-toggle" onclick="toggleAbstract(this)"><i class="fas fa-plus"></i> Abstract</button>
+                    </div>
+                    <div class="abstract-content">Autonomous driving (AD) testing constitutes a critical methodology for assessing performance benchmarks prior to product deployment. The creation of segmented scenarios within a simulated environment is acknowledged as a robust and effective strategy; however, the process of tailoring these scenarios often necessitates laborious and time-consuming manual efforts, thereby hindering the development and implementation of AD technologies. In response to this challenge, Text2Scenario is introduced, a framework that leverages a Large Language Model (LLM) to autonomously generate simulation test scenarios that closely align with user specifications, derived from their natural language inputs. Specifically, an LLM, equipped with a meticulously engineered input prompt scheme functions as a text parser for test scenario descriptions. The LLM extracts from a hierarchically organized scenario repository the components that most accurately reflect the user's preferences. Subsequently, by exploiting the precedence of scenario components, the process involves sequentially matching and linking scenario representations within a Domain Specific Language corpus, ultimately fabricating executable test scenarios.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. VCAT (2025, IEEE IV) -->
+        <div class="pub-card">
+            <div class="pub-card-inner">
+                <div class="pub-figure">
+                    <img src="publication/figures/vulnerability-aware.jpg" alt="VCAT Framework">
+                </div>
+                <div class="pub-info">
+                    <span class="pub-badge conference">Conference</span>
+                    <div class="pub-title">Vulnerability-aware and Curiosity-driven Adversarial Reinforcement Learning Policy for Safety-Critical Scenario Generation</div>
+                    <div class="pub-brief">Proposes a vulnerability-aware and curiosity-driven adversarial RL policy that uses a surrogate network to fit the victim's value function and random network distillation for exploration, significantly enhancing policy exposure in learning-based AVs.</div>
+                    <div class="pub-authors"><span class="me">Xuan Cai</span>, Zhiyong Cui, Xuesong Bai, Ruimin Ke, Haiyang Yu, Yilong Ren, Zechang Ye</div>
+                    <div class="pub-venue">2025 IEEE Intelligent Vehicles Symposium (IV), Cluj-Napoca, Romania</div>
+                    <div class="pub-actions">
+                        <a href="publication/Vulnerability-aware and Curiosity-driven Adversarial ReinforcementVulnerability-aware and Curiosity-driven Adversarial Reinforcement.pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/caixxuan/VCAT" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <button class="abstract-toggle" onclick="toggleAbstract(this)"><i class="fas fa-plus"></i> Abstract</button>
+                    </div>
+                    <div class="abstract-content">Autonomous vehicles (AVs) face significant threats to their safe operation in complex traffic environments. Adversarial policy for scenario generation has been established as a robust paradigm for enhancing AV resilience against adversarial perturbations through proactive exposure to synthetically engineered safety-critical scenarios. However, adversarial policies in existing methodologies often get stuck in a loop of over-exploiting established vulnerabilities, resulting in poor exploration for AVs. To overcome the limitations, we introduce a pioneering framework termed the vulnerability-aware and curiosity-driven adversarial reinforcement learning policy. Specifically, during the traffic vehicle attacker training phase, a surrogate network is employed to fit the value function of the AV victim, providing dense information about the victim's inherent vulnerabilities. Subsequently, random network distillation is used to characterize the novelty of the scenario, constructing an intrinsic reward to guide the attacker in exploring unexplored territories.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. AST-SRL (2025, IEEE TIV) -->
+        <div class="pub-card">
+            <div class="pub-card-inner">
+                <div class="pub-figure">
+                    <img src="publication/figures/adversarial%20stress%20test.png" alt="AST-SRL Framework">
+                </div>
+                <div class="pub-info">
+                    <span class="pub-badge journal">Journal</span>
+                    <div class="pub-title">Adversarial Stress Test for Autonomous Vehicle via Series Reinforcement Learning Tasks With Reward Shaping</div>
+                    <div class="pub-brief">Introduces an evolving series RL framework for adversarial policy training, integrating RSS and DTW theories to shape the reward function, expediting the exploration of vulnerability-revealing scenarios for both black-box and white-box AV systems.</div>
+                    <div class="pub-authors"><span class="me">Xuan Cai</span>, Xuesong Bai, Zhiyong Cui, Peng Hang, Haiyang Yu, Yilong Ren</div>
+                    <div class="pub-venue">IEEE Transactions on Intelligent Vehicles, Vol. 10, No. 2, pp. 832–845, 2025</div>
+                    <div class="pub-actions">
+                        <a href="publication/Adversarial Stress Test for Autonomous Vehicle via.pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="https://github.com/caixxuan/AST-SRL" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <button class="abstract-toggle" onclick="toggleAbstract(this)"><i class="fas fa-plus"></i> Abstract</button>
+                    </div>
+                    <div class="abstract-content">Testing is a pivotal phase for uncovering potential vulnerabilities in autonomous vehicles (AVs) to develop a secure autonomy system. However, existing methods often lack consideration for efficiently exploring multiple vulnerability-revealing cases, particularly under adversarial game scenarios. We introduce an evolving series reinforcement learning (RL) framework for adversarial policy training, integrating Responsibility Sensitive Safety (RSS) and Dynamic Time Warping (DTW) theories to shape the reward function to steer the evolving direction of the subsequent series agents for exploring vulnerability-revealing attack scenarios uncharted in the refined buffered repository. Our method undertakes adversarial stress tests for both black-box and white-box AV systems under test in driving tasks that engage in games with traffic vehicles and pedestrians. The results indicate that our approach expedites the exploration of additional scenarios blamed for the AV, outperforming the baselines in the vulnerability-revealing accident and scenario diversity.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. SoC Planning (2024, Energy) -->
+        <div class="pub-card">
+            <div class="pub-card-inner">
+                <div class="pub-figure">
+                    <img src="publication/figures/An%20explicit%20SOC.png" alt="SoC Planning Framework">
+                </div>
+                <div class="pub-info">
+                    <span class="pub-badge journal">Journal</span>
+                    <div class="pub-title">An explicit State-of-Charge planning solution for plug-in hybrid electric vehicle based on low-granularity prior-knowledge</div>
+                    <div class="pub-brief">Devises an explicit SoC planning method requiring only sparse traffic prior-knowledge, drawing inspiration from optimal charge depletion behavior, and develops a hierarchical predictive energy management framework integrating SoC planning and power split.</div>
+                    <div class="pub-authors"><span class="me">Xuan Cai</span>, Wei Zhou, Zhiyong Cui, Xuesong Bai, Fan Liu, Haiyang Yu, Yilong Ren</div>
+                    <div class="pub-venue">Energy, Vol. 313, 133990, 2024</div>
+                    <div class="pub-actions">
+                        <a href="publication/An explicit State-of-Charge planning solution for plug-in hybrid electric.pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <button class="abstract-toggle" onclick="toggleAbstract(this)"><i class="fas fa-plus"></i> Abstract</button>
+                    </div>
+                    <div class="abstract-content">The intervention of batteries in hybrid electric vehicles, when paired with an effective Energy Management Strategy (EMS), substantially improves fuel efficiency and reduces emissions in comparison to conventional internal combustion engine vehicles. The evolution of Intelligent Transportation Systems (ITS) has facilitated the possibility of predictive energy management (PEM) predicated on State-of-Charge (SoC) planning. Nevertheless, prevalent methodologies frequently encounter challenges in balancing optimization with real-time applicability. To address these limitations, we have devised an explicit SoC planning method that necessitates sparse traffic prior-knowledge, drawing inspiration from the optimal charge depletion behavior. This innovative method strategically determines the average SoC depletion rate for each anticipated driving road segment by integrating theoretical predictions of optimal depletion rate with experienced constraints. The results of the simulation experiments reveal that the SoC trajectories and fuel consumption generated by this method are in close approximation to theoretically optimal benchmarks.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Decoding (2022, Applied Energy) -->
+        <div class="pub-card">
+            <div class="pub-card-inner">
+                <div class="pub-figure">
+                    <img src="publication/figures/DECODING.png" alt="Decoding CDR Framework">
+                </div>
+                <div class="pub-info">
+                    <span class="pub-badge journal">Journal</span>
+                    <div class="pub-title">Decoding the optimal charge depletion behavior in energy domain for predictive energy management of series plug-in hybrid electric vehicle</div>
+                    <div class="pub-brief">Reveals four aggregated optimal charge depletion behaviors through rigorous PMP-based analytical derivations, providing fundamental understanding on how and why optimal charge depletion rates behave in different driving conditions.</div>
+                    <div class="pub-authors">Wei Zhou, <span class="me">Xuan Cai</span>, Yaoqi Chen, Junqiu Li, Xiaoyan Peng</div>
+                    <div class="pub-venue">Applied Energy, Vol. 316, 119098, 2022</div>
+                    <div class="pub-actions">
+                        <a href="publication/Decoding-optimal-charge-depletion.pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <button class="abstract-toggle" onclick="toggleAbstract(this)"><i class="fas fa-plus"></i> Abstract</button>
+                    </div>
+                    <div class="abstract-content">A critical issue for designing predictive energy management (PEM) strategy of Plug-in Hybrid Electric Vehicles is the planning of optimal global charge trajectory. Existing planning methods have flaws in terms of optimality or computational efficiency due to their lack of in-depth consideration about optimal charge depletion behaviors. To address this issue, rigorous theoretical analysis on the aggregated local and global optimal charge depletion behaviors in energy domain is conducted by combining Pontryagin's Minimum Principle-based analytical derivations and some qualitative reasoning. Fundamental understanding on how the optimal charge depletion rates behave in different driving conditions and why they exhibit such behaviors is provided. The theoretical analysis is further validated through model-in-the-loop tests using an experimentally validated high-fidelity vehicle simulator.</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- News -->
+    <section id="news">
+        <h2 class="section-title">News</h2>
+        <div class="news-item">
+            <div class="news-date">Jun 2025</div>
+            <div class="news-text">One paper accepted to <strong>IEEE Intelligent Vehicles Symposium (IV 2025)</strong>.</div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2025</div>
+            <div class="news-text">One paper published in <strong>Automotive Innovation</strong>.</div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">Feb 2025</div>
+            <div class="news-text">One paper published in <strong>IEEE Transactions on Intelligent Vehicles</strong>.</div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2024</div>
+            <div class="news-text">One paper published in <strong>Energy</strong>.</div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2023</div>
+            <div class="news-text">Started Ph.D. studies at Beihang University.</div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">2022</div>
+            <div class="news-text">One paper published in <strong>Applied Energy</strong>.</div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        &copy; 2025 Xuan Cai. Last updated: April 2026.
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                const offset = navbar.offsetHeight + 16;
+                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Toggle abstract
+    function toggleAbstract(btn) {
+        const content = btn.parentElement.nextElementSibling;
+        const icon = btn.querySelector('i');
+        const isOpen = content.classList.toggle('open');
+        icon.className = isOpen ? 'fas fa-minus' : 'fas fa-plus';
+        btn.childNodes[1].textContent = isOpen ? ' Close' : ' Abstract';
+    }
+</script>
+
+</body>
+</html>
